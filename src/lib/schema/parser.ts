@@ -98,7 +98,7 @@ const normalizeSetting = (input: RawSchemaSetting): SettingField => {
 
   switch (type) {
     case 'header': {
-      const fieldInput = input as Record<string, unknown>
+      const fieldInput = input as unknown as Record<string, unknown>
       const base = createSetting('header') as HeaderField
       return {
         ...base,
