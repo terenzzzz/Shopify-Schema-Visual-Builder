@@ -47,4 +47,16 @@ describe('serializeSchemaDocument', () => {
       min_chars: 8,
     })
   })
+
+  it('omits empty string defaults from serialized output', () => {
+    const { document } = parseSchemaInput(sampleSchema)
+    document.settings[3] = {
+      ...document.settings[3],
+      default: '',
+    }
+
+    const serialized = serializeSchemaDocument(document)
+
+    expect(serialized.settings?.[3]).not.toHaveProperty('default')
+  })
 })

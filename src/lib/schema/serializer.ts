@@ -17,6 +17,10 @@ import type {
 } from '@/types/schema'
 
 const cleanString = (value?: string) => (value && value.trim().length > 0 ? value : undefined)
+const serializeStringDefault = (value?: string) => {
+  const cleanedDefault = cleanString(value)
+  return cleanedDefault === undefined ? {} : { default: cleanedDefault }
+}
 
 const RESERVED_SETTING_KEYS = new Set([
   'type',
@@ -67,20 +71,20 @@ const serializeField = (field: SettingField): RawSchemaSetting => {
     case 'richtext':
       return {
         ...base,
-        default: (field as TextLikeField).default ?? '',
+        ...serializeStringDefault((field as TextLikeField).default),
         ...serializeCustomAttributes(field.customAttributes),
       }
     case 'image_picker':
       return {
         ...base,
-        default: (field as ImagePickerField).default ?? '',
+        ...serializeStringDefault((field as ImagePickerField).default),
         ...serializeCustomAttributes(field.customAttributes),
       }
     case 'select':
     case 'radio':
       return {
         ...base,
-        default: (field as SelectField).default ?? '',
+        ...serializeStringDefault((field as SelectField).default),
         options: (field as SelectField).options.map((option) => ({
           value: option.value,
           label: option.label,
