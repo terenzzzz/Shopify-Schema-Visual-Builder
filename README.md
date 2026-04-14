@@ -135,7 +135,3 @@ npm run test:watch
 - 这是一个纯前端本地工具，不依赖后端服务
 - 当前聚焦 Shopify section schema 的 JSON 建模与可视化编辑
 - 若你需要支持更多 setting 类型或更贴近 Shopify 原生行为的校验，可以继续在 `src/lib/schema` 和 `src/components/fields` 中扩展
-
-## License
-
-如需开源发布，建议补充项目许可证，例如 `MIT`。
